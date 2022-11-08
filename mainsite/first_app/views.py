@@ -1,7 +1,8 @@
 from django.shortcuts import render
 
 # Create your views here.
-from django.http import HttpResponse, HttpResponseNotFound, Http404
+from django.http import HttpResponse, HttpResponseNotFound, Http404, HttpResponseRedirect
+from django.urls import reverse
 
 articles = {
     "sports": "SPORTS PAGE",
@@ -14,13 +15,15 @@ def news_view(request,topic):
         result = articles[topic]
         return HttpResponse(articles[topic])
     except:
-        result = "No page for that topic"
         return Http404("Generic Error")
 
-def add_view(request, num1,num2):
+def num_page_view(request,num_page):
 
-    result = num1 + num2
-    result = f"{num1} + {num2} = {result}"
-    return HttpResponse(str(result))
+    topics_list = list(articles.keys())
+    topic = topics_list[num_page]
+
+    webpage = reverse("topic-page", args=[topic])
+
+    return HttpResponseRedirect(webpage)
 
         
