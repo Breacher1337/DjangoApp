@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-from django.http import HttpResponse, HttpResponseNotFound, Http404, HttpResponseRedirect
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.urls import reverse
 
 articles = {
@@ -25,5 +25,3 @@ def num_page_view(request,num_page):
     webpage = reverse("topic-page", args=[topic])
 
     return HttpResponseRedirect(webpage)
-
-        
