@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <!--
 	Dimension by HTML5 UP
@@ -7,17 +8,12 @@
 -->
 <html lang="en">
 	<head>
-		<title>Polls</title>
 		<meta charset="utf-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1, user-scalable=no"
-		/>
-		
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+		<title>{{ title }}</title>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link rel="stylesheet" href="{% static '/polls/style.css' %}" />
-		<noscript
-			><link rel="stylesheet" href="assets/css/noscript.css"
-		/></noscript>
 		<link rel="stylesheet" href="{% static '/mysite/css/materialize.min.css' %}">
 		<script src="{% static 'mysite/js/materialize.min.js' %}"></script>
 	</head>
@@ -25,33 +21,20 @@
 		<!-- Wrapper -->
 		<div id="wrapper">
 			<!-- Navbar -->
-			<nav>
-				<ul>
-					<li><a href="#intro">Intro</a></li>
-					<li><a href="#work">Work</a></li>
-					<li><a href="#about">About</a></li>
-					<li><a href="#contact">Contact</a></li>
-					<!--<li><a href="#elements">Elements</a></li>-->
-				</ul>
-			</nav>
-			<!-- Header -->
-			<header id="header">
-				<div class="logo">
-					<span class="icon fa-gem"></span>
+			<nav class="lighten-1" role="navigation">
+				<div class="nav-wrapper container"><a id="logo-container" href="{% url 'landing:index' %}" class="brand-logo">Logo</a>
+				<img src={% static 'polls/images/teddy-bear.png' %} alt="teddy bear">	
+				  <ul class="right hide-on-med-and-down">
+					<li><a href="{% url 'polls:index' %}">Polls</a></li>
+					<li><a href="{% url 'tracker:index' %}">Tracker</a></li>
+
+				  </ul>
+			
+				  <ul id="nav-mobile" class="sidenav">
+					<li><a href="#">Navbar Link</a></li>
+					<img src={% static 'polls/images/teddy-bear.png' %} alt="teddy bear">
+
+				  </ul>
+				  <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 				</div>
-				<img src="{% static 'polls/images/bear.png' %}" alt="My image">
-
-				<div class="content">
-					<div class="inner">
-						<h1>Dimension</h1>
-						<p>
-							A fully responsive site template designed by
-							<a href="https://html5up.net">HTML5 UP</a> and released<br />
-							for free under the
-							<a href="https://html5up.net/license">Creative Commons</a>
-							license.
-						</p>
-					</div>
-				</div>
-
-
+			  </nav>
