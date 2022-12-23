@@ -1,6 +1,7 @@
-{% include "polls/header.html" %}
+{% include "mysite/header.html" %}
 <form action="{% url 'polls:vote' question.id %}" method="post">
 	{% csrf_token %}
+
 	<fieldset>
 		<legend><h1>{{ question.question_text }}</h1></legend>
 		{% if error_message %}
@@ -16,6 +17,8 @@
 		><br />
 		{% endfor %}
 	</fieldset>
+	{{ form.captcha }}
 	<input type="submit" value="Vote" />
+
 </form>
-{% include "polls/footer.html" %}
+{% include "mysite/footer.html" %}

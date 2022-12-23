@@ -1,12 +1,17 @@
-{% include "polls/header.html" %}
-        <h1>Hello, world!</h1>
+{% include "mysite/header.html" %}
+
+<h1 class="header center orange-text">This is the polls page.</h1>
 
 		{% if latest_question_list %}
-		<ul>
+		<ul class="collection container">
 			{% for question in latest_question_list %}
-			<li>
+			<li class="collection-item center">
 				<a href="{% url 'polls:detail' question.id %}"
 					>{{ question.question_text }}</a>
+				<a href="{% url 'polls:detail' question.id %}"
+					>Vote</a>
+				<a href="{% url 'polls:results' question.id %}"
+					>results</a>	
 			</li>
 			{% endfor %}
 		</ul>
@@ -14,4 +19,5 @@
 		<p>No polls are available.</p>
 		{% endif %}
 
- {% include "polls/footer.html" %}
+		<h2 class="center blue-text"><a href="{% url 'polls:new_question' %}">Create new question</a></h2>
+ {% include "mysite/footer.html" %}	
