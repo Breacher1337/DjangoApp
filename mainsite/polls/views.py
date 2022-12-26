@@ -13,15 +13,32 @@ from .forms import MyForm
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
-    title = "Hello World"
-    
+    title= "Polls Page"
+     
     def get_queryset(self):
         return Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
+
+    def get(self, request):
+        template_name = self.template_name
+
+        context = {
+            "title": self.title,
+            self.context_object_name: self.get_queryset() # "IndexView.get_queryset(self)" is also an alternative
+            
+        }
+        
+        return render(request, template_name, context)
+
     
 class NewQuestionView(generic.CreateView):
     model = Question
-
     template_name = "polls/new_question.html"
+    
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = IndexView.title + " - New Question"
+        return context
 
     fields = ['question_text', "pub_date"]
 
@@ -30,9 +47,25 @@ class NewQuestionView(generic.CreateView):
 class DetailView(generic.DetailView):
     model = Question
     template_name = 'polls/detail.html'
+    poll_id = 'question_text'
 
     def get_queryset(self):
         return Question.objects.filter(pub_date__lte=timezone.now())
+
+    # def get(self, request):
+    #     context = {
+    #         "title":  "Idk",
+    #         }
+       
+    #     return render(request, self.template_name, context)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] =  Question.objects.filter(pub_date__lte=timezone.now()) #self.request.path
+
+        return context
+
+    
 
 
 def detail_view(request, question_id):
