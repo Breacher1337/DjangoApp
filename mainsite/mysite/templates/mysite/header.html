@@ -7,32 +7,32 @@
 		<meta charset="utf-8" />
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-		<title>{{ title }}</title>
-
-		
-		<link rel="stylesheet" href="{% static '/polls/style.css' %}" />
-
+		<title>{% block title %}Elaijah's Site{% endblock title %}</title>
 		<!-- Jquery Minified -->
 		<script
   		src="https://code.jquery.com/jquery-3.6.3.min.js"
   		integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
   		crossorigin="anonymous"></script>
 
-		<!-- Compiled and minified CSS -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
 		<!-- Compiled and minified JavaScript -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 		
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">	
+
+		<script src="{% static '/mysite/js/header.js' %}"></script>
+
+		<!-- Compiled and minified CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+		<link rel="stylesheet" href="{% static '/polls/style.css' %}" />
 		
-		<link rel="stylesheet" href="{% static '/mysite/js/header.js' %}" />
+		
 	</head>
 	<body>
 			<!-- Navbar -->
 			<nav class="lighten-1" role="navigation">
 				<div class="nav-wrapper container">
-					<a id="logo-container" href="{% url "index" %}" class="brand-logo">Logo</a>
+					<a id="logo-container" href="{% url "index" %}" class="brand-logo">OurTracker</a>
 					<a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>	
 					<ul class="right hide-on-med-and-down">
 						<li><a href="{% url 'polls:index' %}">Polls</a></li>
@@ -44,8 +44,9 @@
 
 			  
 			<ul class="sidenav" id="nav-mobile">
-				<li><a href="sass.html">Sass</a></li>
-				<li><a href="badges.html">Components</a></li>
-				<li><a href="collapsible.html">Javascript</a></li>
-				<li><a href="mobile.html">Mobile</a></li>
+				<li><a href="{% url 'index' %}">Home</a></li>
+				<li><a href="{% url 'polls:index' %}">Polls</a></li>
+				<li><a href="{% url 'tracker:index' %}">Tracker</a></li>
 			</ul>
+
+			{% block content %}{% endblock content %}
