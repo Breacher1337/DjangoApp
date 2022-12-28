@@ -1,0 +1,16 @@
+{% extends "mysite/header.html" %}
+
+{% block title %}Tracker Test{% endblock title %}
+
+{% block content %}
+
+    {% if "all_issues_list" %}
+        <h1>bruh</h1>
+    {% else %}
+        <h1>No issues at the moment.</h1>
+    {% endif %}
+
+    {% include "mysite/footer.html" %}
+
+{% endblock content %}
+
