@@ -1,12 +1,19 @@
 
 from django.shortcuts import render, get_object_or_404
+from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 
+
+from mysite import settings
+
 from .models import Question, Choice
-from .forms import MyForm
+from .forms import QuestionForm, MyErrorList
+
+
+import requests
 
 # Create your views here.
 
@@ -30,20 +37,22 @@ class IndexView(generic.ListView):
         return render(request, template_name, context)
 
     
-class NewQuestionView(generic.CreateView):
+class NewQuestionView(generic.FormView):
     model = Question
     template_name = "polls/new_question.html"
-    
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["title"] = IndexView.title + " - New Question"
-        return context
+    form_class = QuestionForm
 
-    fields = ['question_text', "pub_date"]
+    def form_valid(self, form):
 
-    def post(self, request):
         return HttpResponseRedirect(reverse("polls:index"))
+
+    def form_invalid(self, form):
+
+        if form.has_error("captcha"):
+            form.errors["captcha"] = ["Please verify CAPTCHA first!"]
+
+
+        return self.render_to_response(self.get_context_data(form=form))
 class DetailView(generic.DetailView):
     model = Question
     template_name = 'polls/detail.html'
