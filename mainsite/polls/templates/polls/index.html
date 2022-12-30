@@ -1,4 +1,6 @@
-{% include "mysite/header.html" %}
+{% extends "mysite/header.html" %}
+
+{% block content %}
 
 <h1 class="header center orange-text">This is the polls page.</h1>
 
@@ -21,4 +23,8 @@
 
 		<h2 class="center blue-text"><a href="{% url 'polls:new_question' %}">Create new question</a></h2>
  
-	{% include "mysite/footer.html" %}	
+		{% include "mysite/footer.html" %}	
+
+{% endblock content %}
+
+

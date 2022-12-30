@@ -1,4 +1,7 @@
-{% include "mysite/header.html" %}
+{% extends "mysite/header.html" %}
+
+{% block content %}
+
 <h1>{{ question.question_text }}</h1>
 
 <ul>
@@ -12,3 +15,7 @@
 <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
 
 {% include "mysite/footer.html" %}
+
+
+{% endblock content %}
+

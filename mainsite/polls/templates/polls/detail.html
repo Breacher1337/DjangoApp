@@ -1,4 +1,7 @@
-{% include "mysite/header.html" %}
+{% extends "mysite/header.html" %}
+
+{% block content %}
+
 <form action="{% url 'polls:vote' question.id %}" method="post">
 	{% csrf_token %}
 
@@ -23,3 +26,5 @@
 </form>
 
 {% include "mysite/footer.html" %}
+
+{% endblock content %}
