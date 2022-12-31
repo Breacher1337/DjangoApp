@@ -1,20 +1,28 @@
 from django.shortcuts import render, redirect
-
-
+from django.views import generic
+from .models import Issue
 from .forms import IssueForm
+from django.utils import timezone
 
 # Create your views here.
 
 
-def home_view(request):
+class HomeView(generic.ListView):
+    model = Issue
+    template_name = "tracker/index.html"
+    context_object_name = "all_issues_list"
 
-    context = {
-        "pizza": "Ayo the pizza here!",
-        "content": "This is the tracker page.",
-        "title": "Tracker",
-    }
-    return render(request, 'mysite/index.html', context=context)
+    def get_queryset(self):
+        return Issue.objects.all()
 
+class DetailView(generic.DetailView):
+    model = Issue
+    template_name = "tracker/detail.html"
+
+    poll_id = 'title'
+
+    def get_queryset(self):
+        return Issue.objects.filter(pk=self.kwargs['pk'])
 
 def create_view(request):
 
@@ -22,7 +30,7 @@ def create_view(request):
         form = IssueForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('issues_list')
+            return redirect('tracker:index')
     else:
         form = IssueForm()
     return render(request, 'tracker/new_issue.html', {'form': form})

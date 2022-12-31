@@ -5,12 +5,25 @@
 {% block content %}
 
     {% if "all_issues_list" %}
-        <h1>bruh</h1>
+    <ul class="collection container">
+         {% for issue in all_issues_list  %}
+			<li class="collection-item center" >
+                <p><a href="{% url 'tracker:detail' issue.id %}">{{ issue.title }}</a></p>
+                <p>{{ issue.description }}</p>
+                <p>{{ issue.issue_type }}</p>
+				<p>{{ question.pub_date }}</p>
+			</li>
+         {% endfor %}
+        </ul>
     {% else %}
         <h1>No issues at the moment.</h1>
     {% endif %}
 
+    <p><a href="{% url 'tracker:create' %}">Create new issue<a></p>
+
     {% include "mysite/footer.html" %}
+
+
 
 {% endblock content %}
 

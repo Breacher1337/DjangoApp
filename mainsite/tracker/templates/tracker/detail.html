@@ -1,0 +1,11 @@
+{% extends "mysite/header.html" %}
+
+{% block title %}Tracker Test{% endblock title %}
+
+{% block content %}
+
+    <p>{{ issue.description }}</p>
+
+    {% include "mysite/footer.html" %}
+{% endblock content %}
+
