@@ -1,21 +1,20 @@
-{% include "mysite/header.html" %}
+{% extends "mysite/header.html" %}
 {% load static %}
 
-
+{% block content %}
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
       <br><br>
 
-      {% block content %}
-      <h1 class="header center orange-text">{{ content }}</h1>
+      
+      <h1 class="header center orange-text">This is where to put quotes.</h1>
 
-      {% if landing %}
       <div class="row center">
         <a href="polls/" class="btn-large waves-effect waves-light orange">Get Started</a>
       </div>
       <br><br>
-      {% endif %}
-      {% endblock %}
+
+      
     </div>
   </div>
 
@@ -58,3 +57,4 @@
   </div>
 
   {% include "mysite/footer.html" %}
+  {% endblock %}
