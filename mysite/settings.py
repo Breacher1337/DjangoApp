@@ -26,6 +26,8 @@ with open(str(BASE_DIR) + "\\secrets.json") as f:
     secrets = json.load(f)
     
 SECRET_KEY = secrets["SETTINGS_SECRET_KEY"]
+RECAPTCHA_PUBLIC_KEY = secrets["RECAPTCHA_PUBLIC_KEY"]
+RECAPTCHA_PRIVATE_KEY = secrets["RECAPTCHA_PRIVATE_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -42,6 +44,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "mysite",
+    "tracker",
+    "captcha",
 ]
 
 MIDDLEWARE = [
@@ -81,8 +86,12 @@ WSGI_APPLICATION = "mysite.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "some-postgres",
+        "USER": "elaijah",
+        "PASSWORD": secrets["POSTGRES_PASSWORD"],
+        "HOST": "localhost",
+        "PORT": "6000",
     }
 }
 
@@ -129,3 +138,5 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+

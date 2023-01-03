@@ -1,0 +1,15 @@
+li a {
+    color: green;
+}
+
+h1 {
+    color:crimson;
+}
+
+div#wrapper {
+    background: white;
+    opacity: 10;
+    background-repeat: no-repeat;
+    background-position-y:top;
+    background-position-x: center;
+}

@@ -10,7 +10,7 @@ from django.utils import timezone
 from mysite import settings
 
 from .models import Question, Choice
-from .forms import QuestionForm, MyErrorList
+from .forms import QuestionForm
 
 
 import requests
@@ -20,7 +20,7 @@ import requests
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
-    title= "Polls Page"
+    title = "Polls Page"
      
     def get_queryset(self):
         return Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
@@ -42,7 +42,20 @@ class NewQuestionView(generic.FormView):
     template_name = "polls/new_question.html"
     form_class = QuestionForm
 
+
+
     def form_valid(self, form):
+
+
+        q_form = QuestionForm(self.request.POST)
+
+        form.is_valid
+
+
+        print(timezone.now())
+
+        print(form.data["pub_date"])
+
 
         return HttpResponseRedirect(reverse("polls:index"))
 
@@ -52,7 +65,8 @@ class NewQuestionView(generic.FormView):
             form.errors["captcha"] = ["Please verify CAPTCHA first!"]
 
 
-        return self.render_to_response(self.get_context_data(form=form))
+
+        return render(self.request, self.template_name, self.get_context_data(form=form))
 class DetailView(generic.DetailView):
     model = Question
     template_name = 'polls/detail.html'
@@ -60,13 +74,6 @@ class DetailView(generic.DetailView):
 
     def get_queryset(self):
         return Question.objects.filter(pub_date__lte=timezone.now())
-
-    # def get(self, request):
-    #     context = {
-    #         "title":  "Idk",
-    #         }
-       
-    #     return render(request, self.template_name, context)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

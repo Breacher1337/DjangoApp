@@ -1,0 +1,39 @@
+{% extends "mysite/header.html" %}
+
+{% block content %}
+
+
+
+		{% if latest_question_list %}
+		<ul class="collection container ">
+
+			{% for question in latest_question_list %}
+			<div class="collection-item center">
+
+			<li>
+						<a href="{% url 'polls:detail' question.id %}"
+							>{{ question.question_text }}</a>
+							<br>
+							<br>
+						<a href="{% url 'polls:detail' question.id %}" class="waves-effect waves-light btn"
+							>Vote</a>
+						<a href="{% url 'polls:results' question.id %}" class="waves-effect waves-light btn"
+							>results</a>	
+						<br>
+				<p>{{ question.pub_date }}</p>
+
+			</li>
+		</div>
+			{% endfor %}
+		</ul>
+		{% else %}
+		<p>No polls are available.</p>
+		{% endif %}
+
+		<h2 class="center blue-text"><a href="{% url 'polls:new_question' %}">Create new question</a></h2>
+ 
+		{% include "mysite/footer.html" %}	
+
+{% endblock content %}
+
+

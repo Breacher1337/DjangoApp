@@ -18,10 +18,12 @@ from django.urls import path, include, re_path
 
 from . import views
 
-app_name = ""
+app_name = "mysite"
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("polls/", include("polls.urls")),
-    path("", views.home_view),
+    path("tracker/", include("tracker.urls")),
+    path("", views.index, name="index"),
 
 ]

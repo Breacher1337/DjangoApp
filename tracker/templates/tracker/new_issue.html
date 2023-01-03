@@ -1,6 +1,8 @@
 {% include "mysite/header.html" %}
 
 
+<div class="container">
+<br>
 <form method="POST" action="{% url 'tracker:create' %}">
     {% csrf_token %}
     {% for field in form %}
@@ -20,4 +22,5 @@
     <br>
     <button type="submit" class="btn btn-primary">Submit</button>
 
+    </div>
 {% include "mysite/footer.html" %}

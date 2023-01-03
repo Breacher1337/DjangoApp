@@ -1,0 +1,36 @@
+{% extends "mysite/header.html" %}
+
+{% block title %}Tracker Test{% endblock title %}
+
+{% block content %}
+<br>
+    {% if "all_issues_list" %}
+    <ul class="collection container">
+         {% for issue in all_issues_list  %}
+            {% if "FR" in issue.issue_type %}
+            <li class="collection-item center card-panel blue lighten-4" >
+            {% else %}
+			<li class="collection-item center card-panel yellow lighten-4" >
+            {% endif %}
+                <p><a href="{% url 'tracker:detail' issue.id %}">{{ issue.title }}</a></p>
+                <p>{{ issue.issue_type }}</p>
+				<p>{{ issue.created_at }}</p>
+                <a href="delete/{{ issue.id }}"><i class="material-icons red-text">clear</i></a>
+			</li>
+         {% endfor %}
+        </ul>
+    {% else %}
+        <h1>No issues at the moment.</h1>
+    {% endif %}
+
+    <br>
+    <div class="center">
+        <a class="btn-floating btn-large waves-effect waves-light red" href={% url 'tracker:create' %}><i class="material-icons">add</i></a>
+    </div>
+
+    {% include "mysite/footer.html" %}
+
+
+
+{% endblock content %}
+

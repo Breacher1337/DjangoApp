@@ -7,5 +7,6 @@ app_name = "tracker"
 urlpatterns = [
     path("", views.HomeView.as_view(), name="index"),
     path("create", views.create_view, name="create"),
-    path("<int:pk>", views.DetailView.as_view(), name="detail")
+    path("<int:pk>", views.DetailView.as_view(), name="detail"),
+    path("delete/<int:id>", views.delete, name="delete"),
 ]
